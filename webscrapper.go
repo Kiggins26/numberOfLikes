@@ -1,11 +1,12 @@
 package main
 
 import (
-    "io"
-    "log"
-    "net/http"
-    "os"
-    "time"
+	"fmt"
+	"io"
+	"log"
+	"net/http"
+	"os"
+	"time"
 )
 
 func makeRequest(url string){
@@ -16,18 +17,13 @@ func makeRequest(url string){
 
     // Make request
     response, err := client.Get(url)
-    if err != nil {
-        log.Fatal(err)
-    }
-    defer response.Body.Close()
-
-    // Copy data from the response to standard output
     n, err := io.Copy(os.Stdout, response.Body)
     if err != nil {
         log.Fatal(err)
+    } else{
+    fmt.Println(string(n));
     }
-
-    log.Println("Number of bytes copied to STDOUT:", n)
+   defer response.Body.Close()
 }
 
 
