@@ -7,6 +7,7 @@ import (
 	"net/http"
 	"os"
 	"time"
+    "io/ioutil"
 )
 
 func makeRequest(url string){
@@ -21,8 +22,16 @@ func makeRequest(url string){
     if err != nil {
         log.Fatal(err)
     } else{
-    fmt.Println(string(n));
+        fmt.Println("---------------------------------------")
+        fmt.Println(string(n))
+        body, err1 := ioutil.ReadAll(response.Body)
+        if err1 != nil{
+        }else{
+
+        bs := string(body)
+        fmt.Println(bs);
     }
+}
    defer response.Body.Close()
 }
 
